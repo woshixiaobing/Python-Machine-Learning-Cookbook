@@ -17,8 +17,23 @@ print("\nMin max scaled data:\n", data_scaled)
 
 # normalization
 data_normalized = preprocessing.normalize(data, norm='l1')
-print("\nL1 normalized data:\n", data_normalized)
+print("L1 normalized data:\n", data_normalized)
+print('L1 norm of every sample for a L1 normed matrics:')
+for i in range(len(data_normalized)):
+    print(np.linalg.norm(data_normalized[i], ord=1))
+print('L2 norm of every sample for a L1 normed matrics:')
+for i in range(len(data_normalized)):
+    print(np.linalg.norm(data_normalized[i], ord=2))
 
+data_norm_l2 = preprocessing.normalize(data, norm='l2')
+print("L2 normalized data:\n", data_norm_l2)
+print('L1 norm of every sample for a L2 normed matrics:')
+for i in range(len(data_norm_l2)):
+    print(np.linalg.norm(data_norm_l2[i], ord=1))
+print('L2 norm of every sample for a L2 normed matrics:')
+for i in range(len(data_norm_l2)):
+    print(np.linalg.norm(data_norm_l2[i], ord=2))
+    
 # binarization
 data_binarized = preprocessing.Binarizer(threshold=1.4).transform(data)
 print("\nBinarized data:\n", data_binarized)
