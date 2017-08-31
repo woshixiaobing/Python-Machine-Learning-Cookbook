@@ -1,8 +1,10 @@
+#%%
 import sys
 
 import numpy as np
 
-filename = sys.argv[1]
+#filename = sys.argv[1]
+filename = 'data_singlevar.txt'
 X = []
 y = []
 with open(filename, 'r') as f:
@@ -11,13 +13,17 @@ with open(filename, 'r') as f:
         X.append(xt)
         y.append(yt)
 
-# Train/test split
+#%% Train/test split
 num_training = int(0.8 * len(X))
 num_test = len(X) - num_training
 
 # Training data
-X_train = np.array(X[:num_training]).reshape((num_training,1))
+X_train = np.array(X[:num_training]).reshape((num_training, 1))
 y_train = np.array(y[:num_training])
+# X_train.shape => (40, 1), which is a matrix
+# y_train.shape => (40,), which is an array
+# type(X_train) => numpy.ndarray
+# type(y_train) => numpy.ndarray
 
 # Test data
 X_test = np.array(X[num_training:]).reshape((num_test,1))
@@ -46,11 +52,11 @@ plt.show()
 # Measure performance
 import sklearn.metrics as sm
 
-print "Mean absolute error =", round(sm.mean_absolute_error(y_test, y_test_pred), 2) 
-print "Mean squared error =", round(sm.mean_squared_error(y_test, y_test_pred), 2) 
-print "Median absolute error =", round(sm.median_absolute_error(y_test, y_test_pred), 2) 
-print "Explain variance score =", round(sm.explained_variance_score(y_test, y_test_pred), 2) 
-print "R2 score =", round(sm.r2_score(y_test, y_test_pred), 2)
+print("Mean absolute error =", round(sm.mean_absolute_error(y_test, y_test_pred), 2))
+print("Mean squared error =", round(sm.mean_squared_error(y_test, y_test_pred), 2))
+print("Median absolute error =", round(sm.median_absolute_error(y_test, y_test_pred), 2))
+print("Explain variance score =", round(sm.explained_variance_score(y_test, y_test_pred), 2))
+print("R2 score =", round(sm.r2_score(y_test, y_test_pred), 2))
 
 # Model persistence
 import cPickle as pickle
@@ -64,5 +70,4 @@ with open(output_model_file, 'r') as f:
     model_linregr = pickle.load(f)
 
 y_test_pred_new = model_linregr.predict(X_test)
-print "\nNew mean absolute error =", round(sm.mean_absolute_error(y_test, y_test_pred_new), 2) 
-
+print("\nNew mean absolute error =", round(sm.mean_absolute_error(y_test, y_test_pred_new), 2))
