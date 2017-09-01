@@ -58,6 +58,22 @@ print("Median absolute error =", round(sm.median_absolute_error(y_test, y_test_p
 print("Explain variance score =", round(sm.explained_variance_score(y_test, y_test_pred), 2))
 print("R2 score =", round(sm.r2_score(y_test, y_test_pred), 2))
 
+#In [27]: a1 = np.array([1,2,3,4,5])
+#In [28]: b2 = np.array([5,4,3,2,1])
+#In [31]: c2 = np.array([1,2,5,4,3])
+#In [29]: sm.mean_squared_error(a1, b2)
+#Out[29]: 8.0
+#In [32]: sm.mean_squared_error(a1, c2)
+#Out[32]: 1.6000000000000001
+#In [38]: sm.mean_squared_error(a1, a1)
+#Out[38]: 0.0
+#In [30]: sm.explained_variance_score(a1, b2)
+#Out[30]: -3.0
+#In [37]: sm.explained_variance_score(a1, c2)
+#Out[37]: 0.19999999999999996
+#In [39]: sm.explained_variance_score(a1, a1)
+#Out[39]: 1.0
+
 # Model persistence
 import cPickle as pickle
 
