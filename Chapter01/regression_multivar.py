@@ -2,7 +2,8 @@ import sys
 
 import numpy as np
 
-filename = sys.argv[1]
+#filename = sys.argv[1]
+filename = "data_multivar.txt"
 X = []
 y = []
 with open(filename, 'r') as f:
@@ -60,10 +61,17 @@ print "R2 score =", round(sm.r2_score(y_test, y_test_pred_ridge), 2)
 # Polynomial regression
 from sklearn.preprocessing import PolynomialFeatures
 
-polynomial = PolynomialFeatures(degree=10)
+polynomial = PolynomialFeatures(degree=2)
 X_train_transformed = polynomial.fit_transform(X_train)
-datapoint = [0.39,2.78,7.11]
+# `datapoint` is the first line of training data: 0.39,2.78,7.11,-8.07
+# verify in IPython with `!head -1 data_multivar.txt`
+datapoint = [0.39, 2.78, 7.11]
 poly_datapoint = polynomial.fit_transform(datapoint)
+print(polynomial.get_feature_names())
+print(polynomial.powers_)
+print(poly_datapoint)
+print(len(polynomial.get_feature_names()))
+print(poly_datapoint.shape)
 
 poly_linear_model = linear_model.LinearRegression()
 poly_linear_model.fit(X_train_transformed, y_train)
